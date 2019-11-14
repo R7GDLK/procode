@@ -1,0 +1,23 @@
+<launch>
+	<!-- 启动MRobot -->
+    	<include file="$(find mrobot_bringup)/launch/mrobot.launch"/>
+
+    	<!-- 建立雷达和基座的相对坐标 -->
+    	<node pkg="tf" type="static_transform_publisher" name="base2laser" args="0.08 0 0 0 0 0 1 /base_link /laser 50"/>
+
+    	<!-- 运行激光雷达驱动 -->
+    	<include file="$(find mrobot_bringup)/launch/rplidar.launch" />
+    	
+	<!-- 运行声源定位-->
+	<node	pkg="sound_locate" 	type="talker.py" 	name="talker" 	output="screen" >
+	</node>
+
+	<node	pkg="sound_locate" 	type="listener.py" 	name="listener" 	output="screen" >
+	</node>
+	<!-- 运行kinect-->
+	<node	pkg="kinect2_bridge" 	type="kinect2_bridge.cpp" 	name="kinect2_bridge" 	output="screen" >
+	</node>
+	<!-- 启动sapr节点-->
+	<node	pkg="sapr" 	type="sapr.cpp" 	name="sapr" 	output="screen" >
+	</node>
+</launch>

@@ -1,0 +1,7 @@
+<launch>
+<!--node pkg="sound_play" type="sound_play_node.py" name="sound_play_node"/-->
+<node pkg="pocketsphinx" type="aiml_tts.py" name="aiml_tts"/>
+
+<node pkg="zbar_opencv" type="zbar_opencv" name="zbar_opencv"/>
+<include file="$(find usb_cam)/launch/usb_cam-test.launch"/>
+</launch>
